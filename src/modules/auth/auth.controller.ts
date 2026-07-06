@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import config from "../../config";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { authServices } from "./auth.services";
@@ -36,15 +35,11 @@ const userLogin = catchAsync(
   },
 );
 
-// get me route
 const getMe = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.cookies.accessToken as string;
+    const { id } = req.user;
 
-    const user = await authServices.getMe(
-      token,
-      config.jwt_access_secret as string,
-    );
+    const user = await authServices.getMe(id);
 
     sendResponse(res, {
       success: true,

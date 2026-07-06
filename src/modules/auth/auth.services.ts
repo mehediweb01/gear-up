@@ -46,14 +46,10 @@ const userLogin = async (payload: ILoginUser) => {
   };
 };
 
-const getMe = async (token: string, secret: string) => {
-  const verifiedUser = jwtUtils.verifyToken(token, secret);
-
-  const { id } = verifiedUser.data as JwtPayload;
-
+const getMe = async (userId: string) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: id,
+      id: userId,
     },
     omit: {
       password: true,
