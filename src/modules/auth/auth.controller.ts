@@ -3,6 +3,21 @@ import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { authServices } from "./auth.services";
 
+const userRegister = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const payload = req.body;
+
+    const user = await authServices.userRegister(payload);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 201,
+      message: "User register successfully!",
+      data: user,
+    });
+  },
+);
+
 const userLogin = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
@@ -51,6 +66,7 @@ const getMe = catchAsync(
 );
 
 export const authController = {
+  userRegister,
   userLogin,
   getMe,
 };
