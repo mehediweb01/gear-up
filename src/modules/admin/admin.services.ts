@@ -1,4 +1,5 @@
 import slugify from "slugify";
+import { UserStatus } from "../../../prisma/generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { ICreateCategory } from "./admin.interface";
 
@@ -40,7 +41,44 @@ const getAllUsers = async () => {
   return users;
 };
 
+const updateUserStatus = async (id: string, status: UserStatus) => {
+  if (!id) throw new Error("User id is required.");
+
+  const requiredStatus = [
+    UserStatus.ACTIVE.toLowerCase(),
+    UserStatus.SUSPENDS.toLowerCase(),
+  ] as UserStatus[];
+
+  if (!requiredStatus.includes(status.toLowerCase() as UserStatus)) {
+    throw new Error(`Only ${requiredStatus.join(",")} can be updated.`);
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!user) throw new Error("User not found.");
+
+  if (user.status.toLowerCase() === status.toLowerCase()) {
+    throw new Error("User status is already updated.");
+  }
+
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      status: status.toUpperCase() as UserStatus,
+    },
+  });
+
+  return updatedUser;
+};
+
 export const adminServices = {
   createCategory,
   getAllUsers,
+  updateUserStatus,
 };

@@ -31,7 +31,27 @@ const getAllUsers = catchAsync(
   },
 );
 
+const updateUserStatus = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const updatedUser = await adminServices.updateUserStatus(
+      id as string,
+      status,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "User status updated successfully!",
+      data: updatedUser,
+    });
+  },
+);
+
 export const adminController = {
   createCategory,
   getAllUsers,
+  updateUserStatus,
 };
