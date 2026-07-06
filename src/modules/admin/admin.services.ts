@@ -36,8 +36,6 @@ const getAllUsers = async () => {
     },
   });
 
-  if (users.length === 0) throw new Error("No users found!");
-
   return users;
 };
 
@@ -77,8 +75,24 @@ const updateUserStatus = async (id: string, status: UserStatus) => {
   return updatedUser;
 };
 
+const getAllGears = async () => {
+  const gears = await prisma.gearItems.findMany({
+    include: {
+      provider: {
+        omit: {
+          password: true,
+        },
+      },
+      categories: true,
+    },
+  });
+
+  return gears;
+};
+
 export const adminServices = {
   createCategory,
   getAllUsers,
   updateUserStatus,
+  getAllGears,
 };

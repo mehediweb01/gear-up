@@ -19,4 +19,6 @@ router.patch(
   adminController.updateUserStatus,
 );
 
+router.get("/gear", auth(UserRole.ADMIN), adminController.getAllGears);
+
 export const adminRoutes = router;

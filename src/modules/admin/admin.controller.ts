@@ -50,8 +50,22 @@ const updateUserStatus = catchAsync(
   },
 );
 
+const getAllGears = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const gears = await adminServices.getAllGears();
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Gears retrieved successfully!",
+      data: gears,
+    });
+  },
+);
+
 export const adminController = {
   createCategory,
   getAllUsers,
   updateUserStatus,
+  getAllGears,
 };
