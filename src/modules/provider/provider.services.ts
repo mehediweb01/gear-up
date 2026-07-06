@@ -17,6 +17,14 @@ const addGear = async (payload: IAddGear, userId: string) => {
     throw new Error("All fields are required");
   }
 
+  const category = await prisma.category.findMany();
+
+  const categoriesIds = category.map((cat) => cat.id);
+
+  if (categoriesIds.indexOf(categoryId) === -1) {
+    throw new Error("Category not found");
+  }
+
   const createdGear = await prisma.gearItems.create({
     data: {
       title,
