@@ -51,6 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Category: 'Category',
+  GearItems: 'GearItems',
   User: 'User'
 } as const
 
@@ -68,6 +70,36 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const GearItemsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  brand: 'brand',
+  pricePerDay: 'pricePerDay',
+  stock: 'stock',
+  image: 'image',
+  isAvailable: 'isAvailable',
+  providerId: 'providerId',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GearItemsScalarFieldEnum = (typeof GearItemsScalarFieldEnum)[keyof typeof GearItemsScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

@@ -1,0 +1,18 @@
+model GearItems {
+  id          String   @id @default(ulid())
+  title       String   @db.VarChar(255)
+  description String?  @db.Text
+  brand       String   @db.VarChar(125)
+  pricePerDay Float    @map("price_per_day")
+  stock       Int      @default(0)
+  image       String
+  isAvailable Boolean  @default(true) @map("is_available")
+  providerId  String
+  provider    User     @relation(fields: [providerId], references: [id])
+  categoryId  String
+  categories  Category @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("gear_items")
+}
