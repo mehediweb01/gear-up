@@ -24,6 +24,23 @@ const createCategory = async (payload: ICreateCategory) => {
   return category;
 };
 
+const getAllUsers = async () => {
+  const users = await prisma.user.findMany({
+    omit: {
+      password: true,
+    },
+    include: {
+      gears: true,
+      _count: true,
+    },
+  });
+
+  if (users.length === 0) throw new Error("No users found!");
+
+  return users;
+};
+
 export const adminServices = {
   createCategory,
+  getAllUsers,
 };

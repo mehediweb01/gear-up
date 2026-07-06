@@ -11,4 +11,6 @@ router.post(
   adminController.createCategory,
 );
 
+router.get("/users", auth(UserRole.ADMIN), adminController.getAllUsers);
+
 export const adminRoutes = router;
