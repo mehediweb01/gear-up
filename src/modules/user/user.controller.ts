@@ -1,12 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
-import { adminServices } from "./admin.services";
-
+import { userServices } from "./user.service";
 
 const getAllUsers = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const users = await adminServices.getAllUsers();
+    const users = await userServices.getAllUsers();
 
     sendResponse(res, {
       success: true,
@@ -22,7 +21,7 @@ const updateUserStatus = catchAsync(
     const { id } = req.params;
     const { status } = req.body;
 
-    const updatedUser = await adminServices.updateUserStatus(
+    const updatedUser = await userServices.updateUserStatus(
       id as string,
       status,
     );
@@ -36,21 +35,7 @@ const updateUserStatus = catchAsync(
   },
 );
 
-const getAllGears = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const gears = await adminServices.getAllGears();
-
-    sendResponse(res, {
-      success: true,
-      statusCode: 200,
-      message: "Gears retrieved successfully!",
-      data: gears,
-    });
-  },
-);
-
-export const adminController = {
+export const userController = {
   getAllUsers,
   updateUserStatus,
-  getAllGears,
 };

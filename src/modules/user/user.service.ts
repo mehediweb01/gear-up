@@ -51,23 +51,7 @@ const updateUserStatus = async (id: string, status: UserStatus) => {
   return updatedUser;
 };
 
-const getAllGears = async () => {
-  const gears = await prisma.gearItems.findMany({
-    include: {
-      provider: {
-        omit: {
-          password: true,
-        },
-      },
-      categories: true,
-    },
-  });
-
-  return gears;
-};
-
-export const adminServices = {
+export const userServices = {
   getAllUsers,
   updateUserStatus,
-  getAllGears,
 };

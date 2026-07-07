@@ -2,10 +2,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { Application } from "express";
 import config from "./config";
-import { adminRoutes } from "./modules/admin/admin.routes";
 import { authRoutes } from "./modules/auth/auth.routes";
 import { categoryRoutes } from "./modules/category/category.routes";
 import { gearRoutes } from "./modules/gear/gear.routes";
+import { userRoutes } from "./modules/user/user.routes";
 
 const app: Application = express();
 
@@ -29,6 +29,6 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/gear", gearRoutes);
 app.use("/api/category", categoryRoutes);
-app.use("/api/admin", adminRoutes);
+app.use("/api/users", userRoutes);
 
 export default app;
