@@ -42,7 +42,23 @@ const getUserOrders = catchAsync(
   },
 );
 
+const getOrderDetails = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const orderId = req.params.id as string;
+
+    const order = await rentalServices.getOrderDetails(orderId);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Order retrieved successfully!",
+      data: order,
+    });
+  },
+);
+
 export const rentalController = {
   createOrder,
   getUserOrders,
+  getOrderDetails,
 };

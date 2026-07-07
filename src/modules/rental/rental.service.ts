@@ -99,7 +99,53 @@ const getUserOrders = async (userId: string) => {
   return orders;
 };
 
+const getOrderDetails = async (orderId: string) => {
+  const order = await prisma.rentalOrder.findUnique({
+    where: {
+      id: orderId,
+    },
+    include: {
+      gear: {
+        include: {
+          provider: {
+            omit: {
+              password: true,
+              role: true,
+              createdAt: true,
+              updatedAt: true,
+              status: true,
+            },
+          },
+          categories: {
+            omit: {
+              createdAt: true,
+              updatedAt: true,
+            },
+          },
+          reviews: {
+            omit: {
+              createdAt: true,
+              updatedAt: true,
+            },
+          },
+        },
+        omit: {
+          stock: true,
+          isAvailable: true,
+          providerId: true,
+          categoryId: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+    },
+  });
+
+  return order;
+};
+
 export const rentalServices = {
   createOrder,
   getUserOrders,
+  getOrderDetails,
 };
