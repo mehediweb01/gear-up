@@ -228,10 +228,31 @@ const updateOrderStatus = async (
   return updatedOrderStatus;
 };
 
+const getAllOrders = async () => {
+  const orders = await prisma.rentalOrder.findMany({
+    include: {
+      gear: {
+        include: {
+          reviews: true,
+          categories: true,
+          provider: {
+            omit: {
+              password: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  return orders;
+};
+
 export const rentalServices = {
   createOrder,
   getUserOrders,
   getOrderDetails,
   getIncomingOrders,
   updateOrderStatus,
+  getAllOrders,
 };

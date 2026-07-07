@@ -93,10 +93,24 @@ const updateOrderStatus = catchAsync(
   },
 );
 
+const getAllOrders = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const orders = await rentalServices.getAllOrders();
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Orders retrieved successfully!",
+      data: orders,
+    });
+  },
+);
+
 export const rentalController = {
   createOrder,
   getUserOrders,
   getOrderDetails,
   getIncomingOrders,
   updateOrderStatus,
+  getAllOrders,
 };
