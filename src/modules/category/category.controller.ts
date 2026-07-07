@@ -16,6 +16,22 @@ const getAllCategories = catchAsync(
   },
 );
 
+const createCategory = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const payload = req.body;
+
+    const category = await categoryServices.createCategory(payload);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 201,
+      message: "Category created successfully!",
+      data: category,
+    });
+  },
+);
+
 export const categoryController = {
   getAllCategories,
+  createCategory,
 };
