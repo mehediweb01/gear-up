@@ -50,6 +50,45 @@ const addGear = async (payload: IAddGear, userId: string) => {
   return createdGear;
 };
 
+const updateGear = async (payload: IAddGear, gearId: string) => {
+  const { title, description, brand, pricePerDay, stock, image, isAvailable } =
+    payload;
+
+  const gear = await prisma.gearItems.findUnique({
+    where: {
+      id: gearId,
+    },
+  });
+
+  if (!gear) throw new Error("Gear not found!");
+
+  const updatedGear = await prisma.gearItems.update({
+    where: {
+      id: gear.id,
+    },
+    data: {
+      title: title,
+      description: description,
+      brand: brand,
+      pricePerDay: pricePerDay,
+      stock: stock,
+      image: image,
+      isAvailable: isAvailable,
+    },
+    include: {
+      categories: true,
+      provider: {
+        omit: {
+          password: true,
+        },
+      },
+    },
+  });
+
+  return updatedGear;
+};
+
 export const providerServices = {
   addGear,
+  updateGear,
 };

@@ -6,7 +6,7 @@ import { providerServices } from "./provider.services";
 const addGear = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
-    const userId = req.user.id
+    const userId = req.user.id;
 
     const gear = await providerServices.addGear(payload, userId);
 
@@ -19,6 +19,26 @@ const addGear = catchAsync(
   },
 );
 
+const updateGear = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const payload = req.body;
+    const gearId = req.params.id;
+
+    const updatedGear = await providerServices.updateGear(
+      payload,
+      gearId as string,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Gear updated successfully!",
+      data: updatedGear,
+    });
+  },
+);
+
 export const providerController = {
   addGear,
+  updateGear,
 };
