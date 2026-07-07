@@ -57,8 +57,24 @@ const getOrderDetails = catchAsync(
   },
 );
 
+const getIncomingOrders = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user.id as string;
+
+    const orders = await rentalServices.getIncomingOrders(userId);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Incoming orders retrieved successfully!",
+      data: orders,
+    });
+  },
+);
+
 export const rentalController = {
   createOrder,
   getUserOrders,
   getOrderDetails,
+  getIncomingOrders,
 };
