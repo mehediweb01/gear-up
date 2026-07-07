@@ -1,3 +1,4 @@
+import { RentalOrderStatus } from "../../../prisma/generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { IRentalOrder } from "./rental.interface";
 
@@ -164,9 +165,73 @@ const getIncomingOrders = async (userId: string) => {
   return orders;
 };
 
+const updateOrderStatus = async (
+  userId: string,
+  orderId: string,
+  status: RentalOrderStatus,
+) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
+  if (!user) throw new Error("User not found!");
+
+  const requiredOrderStatus = [
+    RentalOrderStatus.PLACED.toLowerCase(),
+    RentalOrderStatus.CANCELLED.toLowerCase(),
+    RentalOrderStatus.CONFIRMED.toLowerCase(),
+    RentalOrderStatus.PAID.toLowerCase(),
+    RentalOrderStatus.PICKED_UP.toLowerCase(),
+    RentalOrderStatus.RETURNED.toLowerCase(),
+  ];
+
+  if (
+    !requiredOrderStatus.includes(status.toLowerCase() as RentalOrderStatus)
+  ) {
+    throw new Error(`Only ${requiredOrderStatus.join(",")} can be updated.`);
+  }
+
+  const order = await prisma.rentalOrder.findUnique({
+    where: {
+      id: orderId,
+    },
+    include: {
+      gear: {
+        select: {
+          providerId: true,
+        },
+      },
+    },
+  });
+
+  if (!order) throw new Error("Order not found!");
+
+  if (order?.gear.providerId !== userId) {
+    throw new Error("You are not authorized to update this order!");
+  }
+
+  if (order.status.toLowerCase() === status.toLowerCase()) {
+    throw new Error("Order status is already updated.");
+  }
+
+  const updatedOrderStatus = await prisma.rentalOrder.update({
+    where: {
+      id: order.id,
+    },
+    data: {
+      status: status.toUpperCase() as RentalOrderStatus,
+    },
+  });
+
+  return updatedOrderStatus;
+};
+
 export const rentalServices = {
   createOrder,
   getUserOrders,
   getOrderDetails,
   getIncomingOrders,
+  updateOrderStatus,
 };

@@ -72,9 +72,31 @@ const getIncomingOrders = catchAsync(
   },
 );
 
+const updateOrderStatus = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user.id as string;
+    const orderId = req.params.id as string;
+    const { status } = req.body;
+
+    const updatedOrderStatus = await rentalServices.updateOrderStatus(
+      userId,
+      orderId,
+      status,
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Order status updated successfully!",
+      data: updatedOrderStatus,
+    });
+  },
+);
+
 export const rentalController = {
   createOrder,
   getUserOrders,
   getOrderDetails,
   getIncomingOrders,
+  updateOrderStatus,
 };
