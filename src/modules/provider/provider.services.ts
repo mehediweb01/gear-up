@@ -88,7 +88,24 @@ const updateGear = async (payload: IAddGear, gearId: string) => {
   return updatedGear;
 };
 
+const deleteGear = async (gearId: string) => {
+  const gear = await prisma.gearItems.findUnique({
+    where: {
+      id: gearId,
+    },
+  });
+
+  if (!gear) throw new Error("Gear not found!");
+
+  await prisma.gearItems.delete({
+    where: {
+      id: gear.id,
+    },
+  });
+};
+
 export const providerServices = {
   addGear,
   updateGear,
+  deleteGear,
 };

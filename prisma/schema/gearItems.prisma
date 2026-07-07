@@ -8,9 +8,9 @@ model GearItems {
   image       String
   isAvailable Boolean  @default(true) @map("is_available")
   providerId  String
-  provider    User     @relation(fields: [providerId], references: [id])
+  provider    User     @relation(fields: [providerId], references: [id], onDelete: Cascade)
   categoryId  String
-  categories  Category @relation(fields: [categoryId], references: [id])
+  categories  Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
