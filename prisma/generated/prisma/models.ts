@@ -10,5 +10,7 @@
  */
 export type * from './models/Category'
 export type * from './models/GearItems'
+export type * from './models/RentalOrder'
+export type * from './models/Review'
 export type * from './models/User'
 export type * from './commonInputTypes'

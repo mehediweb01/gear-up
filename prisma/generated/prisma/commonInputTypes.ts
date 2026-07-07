@@ -177,6 +177,23 @@ export type BoolWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
 }
 
+export type EnumRentalOrderStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.RentalOrderStatus | Prisma.EnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RentalOrderStatus[] | Prisma.ListEnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RentalOrderStatus[] | Prisma.ListEnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRentalOrderStatusFilter<$PrismaModel> | $Enums.RentalOrderStatus
+}
+
+export type EnumRentalOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RentalOrderStatus | Prisma.EnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RentalOrderStatus[] | Prisma.ListEnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RentalOrderStatus[] | Prisma.ListEnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRentalOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.RentalOrderStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRentalOrderStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRentalOrderStatusFilter<$PrismaModel>
+}
+
 export type EnumUserRoleFilter<$PrismaModel = never> = {
   equals?: $Enums.UserRole | Prisma.EnumUserRoleFieldRefInput<$PrismaModel>
   in?: $Enums.UserRole[] | Prisma.ListEnumUserRoleFieldRefInput<$PrismaModel>
@@ -374,6 +391,23 @@ export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedBoolFilter<$PrismaModel>
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
+}
+
+export type NestedEnumRentalOrderStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.RentalOrderStatus | Prisma.EnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RentalOrderStatus[] | Prisma.ListEnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RentalOrderStatus[] | Prisma.ListEnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRentalOrderStatusFilter<$PrismaModel> | $Enums.RentalOrderStatus
+}
+
+export type NestedEnumRentalOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.RentalOrderStatus | Prisma.EnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.RentalOrderStatus[] | Prisma.ListEnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.RentalOrderStatus[] | Prisma.ListEnumRentalOrderStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumRentalOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.RentalOrderStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumRentalOrderStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumRentalOrderStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
