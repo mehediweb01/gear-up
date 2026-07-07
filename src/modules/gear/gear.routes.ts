@@ -5,9 +5,11 @@ import { gearController } from "./gear.controller";
 
 const router = Router();
 
+router.get("/", gearController.getAllGears);
+router.get("/:id", gearController.getGearDetails);
+
 router.post("/add", auth(UserRole.PROVIDER), gearController.addGear);
 router.patch("/:id", auth(UserRole.PROVIDER), gearController.updateGear);
 router.delete("/:id", auth(UserRole.PROVIDER), gearController.deleteGear);
-router.get("/", gearController.getAllGears);
 
 export const gearRoutes = router;

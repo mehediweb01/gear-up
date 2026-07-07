@@ -3,6 +3,34 @@ import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { gearServices } from "./gear.services";
 
+const getAllGears = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const gears = await gearServices.getAllGears();
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Gears retrieved successfully!",
+      data: gears,
+    });
+  },
+);
+
+const getGearDetails = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const gearId = req.params.id;
+
+    const gear = await gearServices.getGearDetails(gearId as string);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Gear retrieved successfully!",
+      data: gear,
+    });
+  },
+);
+
 const addGear = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
@@ -56,22 +84,10 @@ const deleteGear = catchAsync(
   },
 );
 
-const getAllGears = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const gears = await gearServices.getAllGears();
-
-    sendResponse(res, {
-      success: true,
-      statusCode: 200,
-      message: "Gears retrieved successfully!",
-      data: gears,
-    });
-  },
-);
-
 export const gearController = {
+  getAllGears,
+  getGearDetails,
   addGear,
   updateGear,
   deleteGear,
-  getAllGears,
 };

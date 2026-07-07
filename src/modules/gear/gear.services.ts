@@ -1,6 +1,44 @@
 import { prisma } from "../../lib/prisma";
 import { IAddGear } from "./gear.interface";
 
+const getAllGears = async () => {
+  const gears = await prisma.gearItems.findMany({
+    include: {
+      categories: true,
+    },
+  });
+
+  return gears;
+};
+
+const getGearDetails = async (gearId: string) => {
+  const gear = await prisma.gearItems.findUnique({
+    where: {
+      id: gearId,
+    },
+    include: {
+      provider: {
+        omit: {
+          password: true,
+        },
+      },
+      categories: true,
+      rentals: true,
+      reviews: true,
+      _count: {
+        select: {
+          rentals: true,
+          reviews: true,
+        },
+      },
+    },
+  });
+
+  if (!gear) throw new Error("Gear not found!");
+
+  return gear;
+};
+
 const addGear = async (payload: IAddGear, userId: string) => {
   const {
     title,
@@ -124,19 +162,10 @@ const deleteGear = async (gearId: string, userId: string) => {
   });
 };
 
-const getAllGears = async () => {
-  const gears = await prisma.gearItems.findMany({
-    include: {
-      categories: true,
-    },
-  });
-
-  return gears;
-};
-
 export const gearServices = {
+  getAllGears,
+  getGearDetails,
   addGear,
   updateGear,
   deleteGear,
-  getAllGears,
 };
