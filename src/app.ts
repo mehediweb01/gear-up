@@ -4,7 +4,7 @@ import express, { Application } from "express";
 import config from "./config";
 import { adminRoutes } from "./modules/admin/admin.routes";
 import { authRoutes } from "./modules/auth/auth.routes";
-import { providerRoutes } from "./modules/provider/provider.routes";
+import { gearRoutes } from "./modules/gear/gear.routes";
 
 const app: Application = express();
 
@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
-app.use("/api/provider", providerRoutes);
+app.use("/api/gear", gearRoutes);
 app.use("/api/admin", adminRoutes);
 
 export default app;

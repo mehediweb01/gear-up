@@ -1,5 +1,5 @@
 import { prisma } from "../../lib/prisma";
-import { IAddGear } from "./provider.interface";
+import { IAddGear } from "./gear.interface";
 
 const addGear = async (payload: IAddGear, userId: string) => {
   const {
@@ -50,7 +50,11 @@ const addGear = async (payload: IAddGear, userId: string) => {
   return createdGear;
 };
 
-const updateGear = async (payload: IAddGear, gearId: string) => {
+const updateGear = async (
+  payload: IAddGear,
+  gearId: string,
+  userId: string,
+) => {
   const { title, description, brand, pricePerDay, stock, image, isAvailable } =
     payload;
 
@@ -58,9 +62,17 @@ const updateGear = async (payload: IAddGear, gearId: string) => {
     where: {
       id: gearId,
     },
+    select: {
+      id: true,
+      providerId: true,
+    },
   });
 
   if (!gear) throw new Error("Gear not found!");
+
+  if (gear.providerId !== userId) {
+    throw new Error("You are not authorized to update this gear!");
+  }
 
   const updatedGear = await prisma.gearItems.update({
     where: {
@@ -88,14 +100,22 @@ const updateGear = async (payload: IAddGear, gearId: string) => {
   return updatedGear;
 };
 
-const deleteGear = async (gearId: string) => {
+const deleteGear = async (gearId: string, userId: string) => {
   const gear = await prisma.gearItems.findUnique({
     where: {
       id: gearId,
     },
+    select: {
+      id: true,
+      providerId: true,
+    },
   });
 
   if (!gear) throw new Error("Gear not found!");
+
+  if (gear.providerId !== userId) {
+    throw new Error("You are not authorized to delete this gear!");
+  }
 
   await prisma.gearItems.delete({
     where: {
@@ -104,8 +124,19 @@ const deleteGear = async (gearId: string) => {
   });
 };
 
-export const providerServices = {
+const getAllGears = async () => {
+  const gears = await prisma.gearItems.findMany({
+    include: {
+      categories: true,
+    },
+  });
+
+  return gears;
+};
+
+export const gearServices = {
   addGear,
   updateGear,
   deleteGear,
+  getAllGears,
 };

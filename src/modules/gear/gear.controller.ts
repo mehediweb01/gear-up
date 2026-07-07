@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
-import { providerServices } from "./provider.services";
+import { gearServices } from "./gear.services";
 
 const addGear = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
     const userId = req.user.id;
 
-    const gear = await providerServices.addGear(payload, userId);
+    const gear = await gearServices.addGear(payload, userId);
 
     sendResponse(res, {
       success: true,
@@ -23,10 +23,12 @@ const updateGear = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const payload = req.body;
     const gearId = req.params.id;
+    const userId = req.user.id;
 
-    const updatedGear = await providerServices.updateGear(
+    const updatedGear = await gearServices.updateGear(
       payload,
       gearId as string,
+      userId,
     );
 
     sendResponse(res, {
@@ -41,8 +43,9 @@ const updateGear = catchAsync(
 const deleteGear = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const gearId = req.params.id;
+    const userId = req.user.id;
 
-    await providerServices.deleteGear(gearId as string);
+    await gearServices.deleteGear(gearId as string, userId);
 
     sendResponse(res, {
       success: true,
@@ -53,8 +56,22 @@ const deleteGear = catchAsync(
   },
 );
 
-export const providerController = {
+const getAllGears = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const gears = await gearServices.getAllGears();
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Gears retrieved successfully!",
+      data: gears,
+    });
+  },
+);
+
+export const gearController = {
   addGear,
   updateGear,
   deleteGear,
+  getAllGears,
 };
