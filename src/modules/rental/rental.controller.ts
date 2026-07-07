@@ -27,6 +27,22 @@ const createOrder = catchAsync(
   },
 );
 
+const getUserOrders = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user.id as string;
+
+    const orders = await rentalServices.getUserOrders(userId);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Orders retrieved successfully!",
+      data: orders,
+    });
+  },
+);
+
 export const rentalController = {
   createOrder,
+  getUserOrders,
 };
