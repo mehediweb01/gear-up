@@ -77,21 +77,25 @@ GearUp is a modern gear rental management system that allows users to rent equip
 
 ## Folder Structure:
 
+## Project Structure
+
+```text
 src
 ├── config
+├── lib
 ├── middlewares
 ├── modules
-│ ├── auth
-│ ├── category
-│ ├── gear
-│ ├── payment
-│ ├── rental
-│ ├── review
-│ └── user
+│   ├── auth
+│   ├── category
+│   ├── gear
+│   ├── payment
+│   ├── rental
+│   ├── review
+│   └── user
 ├── utils
-├── lib
 ├── app.ts
 └── server.ts
+```
 
 ---
 
