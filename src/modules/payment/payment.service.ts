@@ -138,13 +138,99 @@ const getUserPayments = async (userId: string) => {
     where: {
       customerId: user.id,
     },
+    include: {
+      rentals: {
+        include: {
+          gear: {
+            include: {
+              provider: {
+                omit: {
+                  password: true,
+                  status: true,
+                  role: true,
+                  createdAt: true,
+                  updatedAt: true,
+                },
+              },
+              categories: {
+                omit: {
+                  createdAt: true,
+                  updatedAt: true,
+                },
+              },
+            },
+            omit: {
+              providerId: true,
+              categoryId: true,
+            },
+          },
+        },
+        omit: {
+          gearId: true,
+        },
+      },
+    },
+    omit: {
+      rentalId: true,
+    },
   });
 
   return payments;
+};
+
+const getPaymentDetails = async (paymentId: string, userId: string) => {
+  const payment = await prisma.payment.findUnique({
+    where: {
+      id: paymentId,
+    },
+    include: {
+      rentals: {
+        include: {
+          gear: {
+            include: {
+              provider: {
+                omit: {
+                  password: true,
+                  role: true,
+                  status: true,
+                  createdAt: true,
+                  updatedAt: true,
+                },
+              },
+              categories: {
+                omit: {
+                  createdAt: true,
+                  updatedAt: true,
+                },
+              },
+            },
+          },
+        },
+        omit: {
+          customerId: true,
+          gearId: true,
+        },
+      },
+    },
+    omit: {
+      rentalId: true,
+    },
+  });
+
+  if (payment?.customerId !== userId) {
+    throw new Error("You are not authorized to view this payment!");
+  }
+
+  if (!payment) {
+    throw new Error("Payment not found!");
+  }
+
+  return payment;
 };
 
 export const paymentServices = {
   createPayment,
   stripeWebhook,
   getUserPayments,
+  getPaymentDetails,
 };
