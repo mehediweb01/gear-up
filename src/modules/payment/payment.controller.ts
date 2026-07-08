@@ -21,13 +21,8 @@ const createPayment = catchAsync(
 
 const stripeWebhook = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log(`hit the webhook`);
-
     const event = req.body as Buffer;
     const signature = req.headers["stripe-signature"] as string;
-
-    console.log("event:", event);
-    console.log(`signature: `, signature);
 
     await paymentServices.stripeWebhook(event, signature);
 
