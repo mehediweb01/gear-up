@@ -5,6 +5,7 @@ import config from "./config";
 import { authRoutes } from "./modules/auth/auth.routes";
 import { categoryRoutes } from "./modules/category/category.routes";
 import { gearRoutes } from "./modules/gear/gear.routes";
+import { paymentRoutes } from "./modules/payment/payment.routes";
 import { rentalRoutes } from "./modules/rental/rental.routes";
 import { reviewRoutes } from "./modules/review/review.routes";
 import { userRoutes } from "./modules/user/user.routes";
@@ -34,5 +35,6 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/rentals", rentalRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/payments", paymentRoutes);
 
 export default app;

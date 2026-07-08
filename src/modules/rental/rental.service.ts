@@ -27,7 +27,7 @@ const createOrder = async (payload: IRentalOrder) => {
     throw new Error("Gear stock is not enough!");
   }
 
-  const totalPrice = quantity * gear.pricePerDay;
+  const totalPrice = quantity * (gear.pricePerDay * Number(rentalDays));
   const start = new Date(startDate);
   let end = new Date(start);
   end.setDate(end.getDate() + Number(rentalDays));
