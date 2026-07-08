@@ -36,3 +36,12 @@ export const RentalOrderStatus = {
 } as const
 
 export type RentalOrderStatus = (typeof RentalOrderStatus)[keyof typeof RentalOrderStatus]
+
+
+export const paymentStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type paymentStatus = (typeof paymentStatus)[keyof typeof paymentStatus]

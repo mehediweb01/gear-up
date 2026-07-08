@@ -9,6 +9,7 @@ model RentalOrder {
   customer   User              @relation(fields: [customerId], references: [id], onDelete: Cascade)
   gearId     String
   gear       GearItems         @relation(fields: [gearId], references: [id], onDelete: Cascade)
+  payments   Payment[]
   createdAt  DateTime          @default(now()) @map("created_at")
   updatedAt  DateTime          @updatedAt @map("updated_at")
 

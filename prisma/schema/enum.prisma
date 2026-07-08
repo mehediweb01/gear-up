@@ -17,3 +17,9 @@ enum RentalOrderStatus {
   RETURNED
   CANCELLED
 }
+
+enum paymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
