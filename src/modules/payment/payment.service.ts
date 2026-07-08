@@ -116,7 +116,35 @@ const stripeWebhook = async (payload: Buffer, signature: string) => {
   }
 };
 
+const getUserPayments = async (userId: string) => {
+  if (!userId) {
+    throw new Error("User id is required!");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User not found!");
+  }
+
+  const payments = await prisma.payment.findMany({
+    where: {
+      customerId: user.id,
+    },
+  });
+
+  return payments;
+};
+
 export const paymentServices = {
   createPayment,
   stripeWebhook,
+  getUserPayments,
 };

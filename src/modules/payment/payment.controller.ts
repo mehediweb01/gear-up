@@ -40,7 +40,23 @@ const stripeWebhook = catchAsync(
   },
 );
 
+const getUserPayments = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user.id as string;
+
+    const payments = await paymentServices.getUserPayments(userId);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Payments retrieved successfully!",
+      data: payments,
+    });
+  },
+);
+
 export const paymentController = {
   createPayment,
   stripeWebhook,
+  getUserPayments,
 };
