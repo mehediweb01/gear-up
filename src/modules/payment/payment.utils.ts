@@ -10,6 +10,8 @@ export const handleCompleted = async (session: Stripe.Checkout.Session) => {
 
   if (!payment) return;
 
+  if (payment.status === "COMPLETED") return;
+
   await prisma.$transaction(async (tx) => {
     await prisma.payment.update({
       where: {
@@ -18,7 +20,7 @@ export const handleCompleted = async (session: Stripe.Checkout.Session) => {
       data: {
         status: "COMPLETED",
         paidAt: new Date(),
-        transactionId: `TRXID ${session.payment_intent as string}${new Date()}`,
+        transactionId: `TRXID ${session.payment_intent as string}${new Date().getTime()}`,
       },
     });
 

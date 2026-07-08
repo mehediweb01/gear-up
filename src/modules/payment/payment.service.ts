@@ -29,8 +29,14 @@ const createPayment = async (orderId: string, userId: string) => {
       throw new Error("Order is already paid!");
     }
 
-    const rentalDays =
-      new Date(order.endDate).getDate() - new Date(order.startDate).getDate();
+    const rentalDays = Math.ceil(
+      (order.endDate.getTime() - order.startDate.getTime()) /
+        (1000 * 60 * 60 * 24),
+    );
+
+    if (rentalDays <= 0) {
+      throw new Error("End date must be after start date.");
+    }
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -73,20 +79,6 @@ const createPayment = async (orderId: string, userId: string) => {
         transactionId: null,
       },
     });
-
-    const existingPayment = await prisma.payment.findFirst({
-      where: {
-        stripeSessionId: session.id,
-      },
-    });
-
-    if (existingPayment) {
-      await prisma.payment.delete({
-        where: {
-          id: existingPayment.id,
-        },
-      });
-    }
 
     return {
       sessionId: session.id,
