@@ -5,7 +5,7 @@ import { gearServices } from "./gear.services";
 
 const getAllGears = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const gears = await gearServices.getAllGears();
+    const gears = await gearServices.getAllGears(req.query);
 
     sendResponse(res, {
       success: true,

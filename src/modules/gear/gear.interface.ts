@@ -8,3 +8,10 @@ export interface IAddGear {
   isAvailable?: boolean;
   categoryId: string;
 }
+
+export interface IQuery {
+  category?: string;
+  brand?: string;
+  minPrice?: string;
+  maxPrice?: string;
+}

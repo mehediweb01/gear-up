@@ -1,10 +1,48 @@
 import { prisma } from "../../lib/prisma";
-import { IAddGear } from "./gear.interface";
+import { IAddGear, IQuery } from "./gear.interface";
 
-const getAllGears = async () => {
+const getAllGears = async (query: IQuery) => {
+  const { category, brand, minPrice, maxPrice } = query;
+
   const gears = await prisma.gearItems.findMany({
+    where: {
+      ...(brand && {
+        brand: {
+          equals: brand,
+          mode: "insensitive",
+        },
+      }),
+
+      ...(category && {
+        categories: {
+          slug: category,
+        },
+      }),
+
+      ...((minPrice || maxPrice) && {
+        pricePerDay: {
+          ...(minPrice && { gte: Number(minPrice) }),
+          ...(maxPrice && { lte: Number(maxPrice) }),
+        },
+      }),
+    },
+
     include: {
-      categories: true,
+      categories: {
+        omit: {
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+      provider: {
+        omit: {
+          password: true,
+          role: true,
+          status: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
     },
   });
 
