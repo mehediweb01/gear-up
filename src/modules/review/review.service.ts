@@ -26,6 +26,9 @@ const createReview = async (customerId: string, payload: ICreateReview) => {
 
   if (!hasPurchasedGear) throw new Error("You have not purchased this gear!");
 
+  if (rating < 1 || rating > 5)
+    throw new Error("Rating must be between 1 and 5!");
+
   const review = await prisma.review.create({
     data: {
       comment,

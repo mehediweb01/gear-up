@@ -18,6 +18,16 @@ GearUp is a modern gear rental management system that allows users to rent equip
 
 ---
 
+## All link:
+
+[https://gear-up-gold.vercel.app](https://gear-up-gold.vercel.app)
+
+[GitHub Repo](https://github.com/mehediweb01/gear-up)
+
+[API docs](https://drive.google.com/file/d/1pDLSK3HQuKUp1HUnSeitorF7w20BymwT/view?usp=sharing)
+
+---
+
 ## DB SCHEMA:
 
 - category schema
@@ -76,8 +86,6 @@ GearUp is a modern gear rental management system that allows users to rent equip
 ---
 
 ## Folder Structure:
-
-## Project Structure
 
 ```text
 src

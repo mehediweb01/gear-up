@@ -32,6 +32,23 @@ const createOrder = async (payload: IRentalOrder) => {
   let end = new Date(start);
   end.setDate(end.getDate() + Number(rentalDays));
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const normalizedStart = new Date(start);
+  normalizedStart.setHours(0, 0, 0, 0);
+
+  const normalizedEnd = new Date(end);
+  normalizedEnd.setHours(0, 0, 0, 0);
+
+  if (normalizedStart < today) {
+    throw new Error("Start date cannot be earlier than today.");
+  }
+
+  if (normalizedEnd < normalizedStart) {
+    throw new Error("End date cannot be earlier than the start date.");
+  }
+
   const createdOrder = await prisma.rentalOrder.create({
     data: {
       customerId,

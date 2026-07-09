@@ -1,0 +1,709 @@
+{
+  "info": {
+    "_postman_id": "7df8d596-8831-4962-abc4-38675261a1b5",
+    "name": "assignment 4 ( GearUp )",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45983059"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "register user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"joy\",\r\n    \"email\": \"joy@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"phone\": \"01745338095\",\r\n    \"role\": \"customer\",\r\n    \"address\": \"Tangail\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/auth/register",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"joy@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/auth/login",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/auth/me",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "gear",
+      "item": [
+        {
+          "name": "gear added",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Camping Tent (4 Person) premium version\",\r\n    \"brand\": \"Coleman\",\r\n    \"pricePerDay\": 50,\r\n    \"stock\": 1500,\r\n    \"image\": \"www.yahoo.com\",\r\n    \"categoryId\": \"01KWWAFH5K0GRA1QVE404A2FBD\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/gear/add",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "gear",
+                "add"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update gear",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Camping Tent (4 Person) new version\",\r\n    \"brand\": \"Coleman\",\r\n    \"pricePerDay\": 1002,\r\n    \"stock\": 305,\r\n    \"image\": \"www.yahoo.com\",\r\n    \"categoryId\": \"01KWWAFH5K0GRA1QVE404A2FBD\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/gear/01KWWBEK41G1273R4G0MH7AK54",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "gear",
+                "01KWWBEK41G1273R4G0MH7AK54"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete gear",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"pricePerDay\": 87\r\n}"
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/gear/01KWWBQ00E2922ZZRZNNX3YQV5",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "gear",
+                "01KWWBQ00E2922ZZRZNNX3YQV5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all gears",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/gear",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "gear"
+              ],
+              "query": [
+                {
+                  "key": "brand",
+                  "value": "Coleman",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "gear details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/gear/01KWWBEK41G1273R4G0MH7AK54",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "gear",
+                "01KWWBEK41G1273R4G0MH7AK54"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "category",
+      "item": [
+        {
+          "name": "get all category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/category/",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "category",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create category",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Tennis\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/category/create",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "category",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "get all users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/users",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update user status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\": \"active\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/users/01KWW58XGJENG37BTHHP0BYW9Q",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "users",
+                "01KWW58XGJENG37BTHHP0BYW9Q"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "rentals",
+      "item": [
+        {
+          "name": "create order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"gearId\": \"01KWZ33FWQFKNG6D328AAH1K7Q\",\r\n    \"quantity\": 109,\r\n    \"startDate\": \"2026-7-21\",\r\n    \"rentalDays\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/rentals/create",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "rentals",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get users orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/rentals",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "rentals"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get order details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/rentals/01KX0T2Z73F4E7EHSZMP3X4K35",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "rentals",
+                "01KX0T2Z73F4E7EHSZMP3X4K35"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get incoming orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/rentals/provider",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "rentals",
+                "provider"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update order status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\": \"returned\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/rentals/01KX0T2Z73F4E7EHSZMP3X4K35",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "rentals",
+                "01KX0T2Z73F4E7EHSZMP3X4K35"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all rentals admin",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/rentals/admin",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "rentals",
+                "admin"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "reviews",
+      "item": [
+        {
+          "name": "create review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"comment\": \"best course\",\r\n    \"rating\": 4,\r\n    \"gearId\": \"01KWWBEK41G1273R4G0MH7AK54\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/reviews",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "payments",
+      "item": [
+        {
+          "name": "create payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"orderId\": \"01KX1Z6N71A98NQBMV1HZ1QREF\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/payments/checkout",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "checkout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get user payments",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"hasan1@gmail.com\",\r\n    \"password\": \"12345\"\r\n}"
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/payments",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "payments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get payment details",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"hasan1@gmail.com\",\r\n    \"password\": \"12345\"\r\n}"
+            },
+            "url": {
+              "raw": "https://gear-up-gold.vercel.app/api/payments/01KX18YCTM4113PNQ0QMBV9WN7",
+              "protocol": "https",
+              "host": [
+                "gear-up-gold",
+                "vercel",
+                "app"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "01KX18YCTM4113PNQ0QMBV9WN7"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
