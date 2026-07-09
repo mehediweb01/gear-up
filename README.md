@@ -24,7 +24,9 @@ GearUp is a modern gear rental management system that allows users to rent equip
 
 [GitHub Repo](https://github.com/mehediweb01/gear-up)
 
-[API docs](https://drive.google.com/file/d/1pDLSK3HQuKUp1HUnSeitorF7w20BymwT/view?usp=sharing)
+[API docs](https://md-mehedi-hasan.docs.buildwithfern.com/assignment-4-gear-up/)
+
+[Video URL](https://youtu.be/gHIDAHmFvoM)
 
 ---
 
